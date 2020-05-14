@@ -145,4 +145,14 @@ class Options
     {
         return isset($this->options['follow_redirects']) ? (bool) $this->options['follow_redirects'] : false;
     }
+
+    /**
+     * Whether server uses permalinks or not
+     *
+     * @return bool
+     */
+    public function usePermalinks()
+    {
+        return isset($this->options['permalinks']) ? (bool) $this->options['permalinks'] : false;
+    }
 }

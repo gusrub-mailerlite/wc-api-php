@@ -119,7 +119,14 @@ class HttpClient
      */
     protected function buildApiUrl($url)
     {
-        $api = $this->options->isWPAPI() ? $this->options->apiPrefix() : '/wc-api/';
+        if ($this->options->isWPAPI()) {
+            $api =  $this->options->apiPrefix();
+        } elseif ($this->options->usePermalinks()) {
+            $api = '/index.php?rest_route=/';
+        } else {
+            $api = '/wc-api/';
+        }
+
 
         return \rtrim($url, '/') . $api . $this->options->getVersion() . '/';
     }
@@ -134,8 +141,9 @@ class HttpClient
      */
     protected function buildUrlQuery($url, $parameters = [])
     {
+        $separator = $this->options->usePermalinks() ? '&' : '?';
         if (!empty($parameters)) {
-            $url .= '?' . \http_build_query($parameters);
+            $url .= $separator . \http_build_query($parameters);
         }
 
         return $url;
