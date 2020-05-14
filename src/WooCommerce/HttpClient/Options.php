@@ -153,6 +153,6 @@ class Options
      */
     public function usePermalinks()
     {
-        return isset($this->options['permalinks']) ? (bool) $this->options['permalinks'] : false;
+        return isset($this->options['permalinks']) ? (bool) $this->options['permalinks'] : true;
     }
 }
